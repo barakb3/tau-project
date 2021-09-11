@@ -57,7 +57,7 @@ static PyObject *goal_switch(PyObject *self, PyObject *args)
 {
     PyObject *_PyData, *_mat, *matRow;
     Py_ssize_t Py_goal, Py_n, Py_k, Py_d;
-    int i, j, goal, n, k, d, changed;
+    int i, j, goal, n, k, d;
     double **points, **wam, **ddg, **lnorm, **T;
     EIGEN *eigens;
 

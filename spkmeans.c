@@ -80,6 +80,7 @@ VEC *initialize(FILE *fp, int *n, int *d)
         }
         fsf = fscanf(fp, "%lf%c", &value, &c);
     }
+    free(last_vec->first_coor);
     free(last_coor);
     free(last_vec);
     *n = num_of_vec;

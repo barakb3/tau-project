@@ -792,11 +792,11 @@ int main(int argc, char *argv[])
             }
             printf("%.4f\n", -0.00005 < eigens[i].vector[n-1] && eigens[i].vector[n-1] < 0.0000 ? 0.0000 : eigens[i].vector[n-1]);
         }
-        for (j = 0; j < n - 1; j++)
+        for (j = 0; j < n; j++)
         {
             printf("%.4f,", -0.00005 < eigens[n-1].vector[j] && eigens[n-1].vector[j] < 0.0000 ? 0.0000 : eigens[n-1].vector[j]);
         }
-        printf("%.4f", -0.00005 < eigens[n-1].vector[n-1] && eigens[n-1].vector[n-1] < 0.0000 ? 0.0000 : eigens[n-1].vector[n-1]);
+        printf("%.4f", -0.00005 < eigens[n].vector[n-1] && eigens[n].vector[n-1] < 0.0000 ? 0.0000 : eigens[n].vector[n-1]);
         free(wam[0]);
         free(wam);
         free(ddg[0]);

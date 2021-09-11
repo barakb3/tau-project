@@ -507,11 +507,11 @@ EIGEN *jacobi(double **A, int n)
             {
                 break;
             }
-            update_A(A, i_tmp, j_tmp, s, c, n); //in place
+            update_A(A, i_tmp, j_tmp, s, c, n); /*in place*/
             continue;
         }
-        update_A(A, i_tmp, j_tmp, s, c, n); //in place
-        update_V(V, i_tmp, j_tmp, s, c, n); //in place
+        update_A(A, i_tmp, j_tmp, s, c, n); /*in place*/
+        update_V(V, i_tmp, j_tmp, s, c, n); /*in place*/
     } while (cnt != 100 && converge(A, &old, n));
     V_to_eigens(V, A, eigens, n);
 
@@ -686,7 +686,7 @@ int main(int argc, char *argv[])
     fclose(fp);
     points = initialize_data(head, n, d);
     if (goal == 1)
-    { // spk
+    { /* spk */
         if (k >= n)
         {
             printf("Invalid Input!\n");
@@ -739,7 +739,7 @@ int main(int argc, char *argv[])
         free(centroids);
     }
     else if (goal == 2)
-    { // wam
+    { /* wam */
         wam = gen_wam(points, n, d);
         print_matrix(wam, n, n);
 
@@ -747,7 +747,7 @@ int main(int argc, char *argv[])
         free(wam);
     }
     else if (goal == 3)
-    { // ddg
+    { /* ddg */
         wam = gen_wam(points, n, d);
         ddg = gen_ddg(wam, n);
         print_matrix(ddg, n, n);
@@ -758,7 +758,7 @@ int main(int argc, char *argv[])
         free(ddg);
     }
     else if (goal == 4)
-    { // lnorm
+    { /* lnorm */
         wam = gen_wam(points, n, d);
         ddg = gen_ddg(wam, n);
         lnorm = gen_lnorm(wam, ddg, n);
@@ -772,7 +772,7 @@ int main(int argc, char *argv[])
         free(lnorm);
     }
     else
-    { //goal == 5, jacobi
+    { /* jacobi */
         wam = gen_wam(points, n, d);
         ddg = gen_ddg(wam, n);
         lnorm = gen_lnorm(wam, ddg, n);

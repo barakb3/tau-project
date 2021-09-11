@@ -92,8 +92,8 @@ double **initialize_data(VEC *head, int n, int d)
     COOR *tmp_coor;
     int i = 0;
     int j = 0;
-    double **data = (double **)calloc(n, sizeof(double *));
-    double *data_inner = (double *)calloc(n * d, sizeof(double));
+    double **data = (double **)malloc(n*sizeof(double *));
+    double *data_inner = (double *)malloc(n * d * sizeof(double));
     assert(data != NULL);
     assert(data_inner != NULL);
 
@@ -227,8 +227,8 @@ double **initialize_centroids(double **data, int k, int d)
 {
     int i = 0;
     int j = 0;
-    double **centroids = (double **)calloc(k, sizeof(double *));
-    double *centroids_inner = (double *)calloc(k * d, sizeof(double));
+    double **centroids = (double **)malloc(k * sizeof(double *));
+    double *centroids_inner = (double *)malloc(k * d * sizeof(double));
     assert(centroids != NULL);
     assert(centroids_inner != NULL);
 
@@ -257,7 +257,7 @@ int *initialize_sizes(int k)
 double **initialize_sums(int k, int d)
 {
     int i;
-    double **sums = (double **)calloc(k, sizeof(double *));
+    double **sums = (double **)malloc(k * sizeof(double *));
     double *sums_inner = (double *)calloc(k * d, sizeof(double));
     assert(sums != NULL);
     assert(sums_inner != NULL);
@@ -330,7 +330,7 @@ double square_vec(double *vec, int d)
 double *subtract_vectors(double *vec1, double *vec2, int d)
 {
     int i;
-    double *res = (double *)calloc(d, sizeof(double));
+    double *res = (double *)malloc(d * sizeof(double));
     assert(res != NULL);
     for (i = 0; i < d; ++i)
     {

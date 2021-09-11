@@ -273,6 +273,7 @@ void assign_vec_to_cluster(double **data, int *sizes, double **sums, double **ce
     double argmin;
     int cluster_index;
     double a;
+    double *diff;
     int i;
     int j;
     for (i = 0; i < n; ++i)
@@ -281,7 +282,9 @@ void assign_vec_to_cluster(double **data, int *sizes, double **sums, double **ce
         cluster_index = -1;
         for (j = 0; j < k; ++j)
         {
-            a = square_vec(subtract_vectors(data[i], centroids[j], d), d); /* free res of subtracr---------------------------------------*/
+            diff = subtract_vectors(data[i], centroids[j], d);
+            a = square_vec(diff, d);
+            free(diff);
             if (a < argmin || argmin == -1.0)
             {
                 argmin = a;
@@ -419,6 +422,7 @@ double calc_row_sum(double *wam_row, int n)
 double **gen_lnorm(double **wam, double **ddg, int n)
 {
     int i;
+    double **A, **B;
     double **lnorm = (double **)malloc(n * sizeof(double *));
     double *lnorm_inner = (double *)calloc(n * n, sizeof(double));
     assert(lnorm != NULL);
@@ -433,8 +437,11 @@ double **gen_lnorm(double **wam, double **ddg, int n)
     In the first step, lnorm plays the role of the identity matrix.
     Notice that "mat_sub" changes lnorm in-place.
     */
-
-    mat_sub(lnorm, mat_mul(mat_mul(ddg, wam, n), ddg, n), n);
+    A = mat_mul(ddg, wam, n);
+    B = mat_mul(A, ddg, n);
+    mat_sub(lnorm, B, n);
+    free(A);
+    free(B);
     return lnorm;
 }
 

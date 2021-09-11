@@ -82,7 +82,7 @@ VEC *initialize(FILE *fp, int *n, int *d)
         }
         fsf = fscanf(fp, "%lf%c", &value, &c);
     }
-    
+
     free(last_coor);
     free(last_vec);
     *n = num_of_vec;
@@ -97,7 +97,7 @@ double **initialize_data(VEC *head, int n, int d)
     COOR *tmp_coor;
     int i = 0;
     int j = 0;
-    double **data = (double **)malloc(n*sizeof(double *));
+    double **data = (double **)malloc(n * sizeof(double *));
     double *data_inner = (double *)malloc(n * d * sizeof(double));
     assert(data != NULL);
     assert(data_inner != NULL);
@@ -106,20 +106,34 @@ double **initialize_data(VEC *head, int n, int d)
     {
         data[i] = data_inner + i * d;
     }
-    for (i = 0; i < n; ++i)
+    for (i = 0; i < n - 1; ++i)
     {
-        for (j = 0; j < d; ++j)
+        for (j = 0; j < d - 1; ++j)
         {
             data[i][j] = last_coor->value;
             tmp_coor = last_coor;
             last_coor = last_coor->next;
             free(tmp_coor);
         }
+        data[i][d - 1] = last_coor->value;
+        free(last_coor);
+
         tmp_vec = last_vec;
         last_vec = last_vec->next;
         free(tmp_vec);
         last_coor = last_vec->first_coor;
     }
+    for (j = 0; j < d - 1; ++j)
+    {
+        data[n-1][j] = last_coor->value;
+        tmp_coor = last_coor;
+        last_coor = last_coor->next;
+        free(tmp_coor);
+    }
+    data[n-1][d - 1] = last_coor->value;
+    free(last_coor);
+
+    free(last_vec);
     return data;
 }
 
@@ -436,7 +450,7 @@ double **gen_lnorm(double **wam, double **ddg, int n)
     {
         lnorm[i] = lnorm_inner + i * n;
         lnorm[i][i] = 1;
-        ddg[i][i] = 1/sqrt(ddg[i][i]);
+        ddg[i][i] = 1 / sqrt(ddg[i][i]);
     }
     /*
     In the first step, lnorm plays the role of the identity matrix.
@@ -746,7 +760,7 @@ int main(int argc, char *argv[])
         free(sums[0]);
         free(sums);
         free(sizes);
-        
+
         print_matrix(centroids, k, d);
 
         free(centroids[0]);
@@ -796,7 +810,7 @@ int main(int argc, char *argv[])
         {
             printf("%.4f,", -0.00005 < eigens[i].value && eigens[i].value < 0.0000 ? 0.0000 : eigens[i].value);
         }
-        printf("%.4f\n", -0.00005 < eigens[n-1].value && eigens[n-1].value < 0.0000 ? 0.0000 : eigens[n-1].value);
+        printf("%.4f\n", -0.00005 < eigens[n - 1].value && eigens[n - 1].value < 0.0000 ? 0.0000 : eigens[n - 1].value);
 
         for (i = 0; i < n - 1; i++)
         {
@@ -804,13 +818,13 @@ int main(int argc, char *argv[])
             {
                 printf("%.4f,", -0.00005 < eigens[i].vector[j] && eigens[i].vector[j] < 0.0000 ? 0.0000 : eigens[i].vector[j]);
             }
-            printf("%.4f\n", -0.00005 < eigens[i].vector[n-1] && eigens[i].vector[n-1] < 0.0000 ? 0.0000 : eigens[i].vector[n-1]);
+            printf("%.4f\n", -0.00005 < eigens[i].vector[n - 1] && eigens[i].vector[n - 1] < 0.0000 ? 0.0000 : eigens[i].vector[n - 1]);
         }
         for (j = 0; j < n - 1; j++)
         {
-            printf("%.4f,", -0.00005 < eigens[n-1].vector[j] && eigens[n-1].vector[j] < 0.0000 ? 0.0000 : eigens[n-1].vector[j]);
+            printf("%.4f,", -0.00005 < eigens[n - 1].vector[j] && eigens[n - 1].vector[j] < 0.0000 ? 0.0000 : eigens[n - 1].vector[j]);
         }
-        printf("%.4f", -0.00005 < eigens[n-1].vector[n-1] && eigens[n-1].vector[n-1] < 0.0000 ? 0.0000 : eigens[n-1].vector[n-1]);
+        printf("%.4f", -0.00005 < eigens[n - 1].vector[n - 1] && eigens[n - 1].vector[n - 1] < 0.0000 ? 0.0000 : eigens[n - 1].vector[n - 1]);
         free(wam[0]);
         free(wam);
         free(ddg[0]);

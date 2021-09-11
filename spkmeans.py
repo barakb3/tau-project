@@ -41,11 +41,11 @@ def kmeans_pp_alg(data, n, k, d):
 def print_matrix(mat, lines, columns):
     for i in range(lines - 1):
         for j in range(columns - 1):
-            print(f'{mat[i][j]:.4f}', end=',')
-        print(f'{mat[i][columns - 1]:.4f}')
+            print("0.0000" if -0.0005 < mat[i][j] < 0 else f'{mat[i][j]:.4f}', end=',')
+        print("0.0000" if -0.0005 < mat[i][j] < 0 else f'{mat[i][columns - 1]:.4f}')
     for j in range(columns - 1):
-        print(f'{mat[lines - 1][j]:.4f}', end=',')
-    print(f'{mat[lines - 1][columns - 1]:.4f}', end='')
+        print("0.0000" if -0.0005 < mat[i][j] < 0 else f'{mat[lines - 1][j]:.4f}', end=',')
+    print("0.0000" if -0.0005 < mat[i][j] < 0 else f'{mat[lines - 1][columns - 1]:.4f}', end='')
 
 
 enum_goal = {"spk": 1, "wam": 2, "ddg": 3, "lnorm": 4, "jacobi": 5}

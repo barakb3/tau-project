@@ -175,12 +175,6 @@ static PyObject *goal_switch(PyObject *self, PyObject *args)
             PyTuple_SET_ITEM(_mat, i+1, matRow);
         }
 
-        free(wam[0]);
-        free(wam);
-        free(ddg[0]);
-        free(ddg);
-        free(lnorm[0]);
-        free(lnorm);
         for (i = 0; i < n; i++)
         {
             free(eigens[i].vector);

@@ -18,6 +18,7 @@ typedef struct EIGEN
 {
     double *vector;
     double value;
+    int orig_index;
 } EIGEN;
 
 /*########## inputs treatment ##########*/

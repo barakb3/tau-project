@@ -125,16 +125,16 @@ double **initialize_data(VEC *head, int n, int d)
     }
     for (j = 0; j < d - 1; ++j)
     {
-        data[n-1][j] = last_coor->value;
+        data[n - 1][j] = last_coor->value;
         tmp_coor = last_coor;
         last_coor = last_coor->next;
         free(tmp_coor);
     }
-    data[n-1][d - 1] = last_coor->value;
+    data[n - 1][d - 1] = last_coor->value;
     free(last_coor);
 
     free(last_vec);
-    
+
     return data;
 }
 
@@ -194,8 +194,14 @@ int my_comparator(const void *a, const void *b)
     const EIGEN *pb = (const EIGEN *)b;
     double da = pa->value;
     double db = pb->value;
-
-    return (da > db) ? 1 : ((da < db) ? -1 : 0);
+    if (da == db)
+    {
+        return (pa->orig_index > pb->orig_index) ? 1 : ((pa->orig_index < pb->orig_index) ? -1 : 0);
+    }
+    else
+    {
+        return (da > db) ? 1 : ((da < db) ? -1 : 0);
+    }
 }
 
 double **gen_T(EIGEN *eigens, int n, int k)

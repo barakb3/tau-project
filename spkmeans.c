@@ -440,7 +440,9 @@ double **gen_lnorm(double **wam, double **ddg, int n)
     A = mat_mul(ddg, wam, n);
     B = mat_mul(A, ddg, n);
     mat_sub(lnorm, B, n);
+    free(A[0]);
     free(A);
+    free(B[0]);
     free(B);
     return lnorm;
 }

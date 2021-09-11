@@ -1,7 +1,6 @@
 #ifndef SPKMEANS_H_
 #define SPKMEANS_H_
 #include <stdio.h>
-#include <Python.h>
 
 typedef struct COOR
 {
@@ -61,10 +60,5 @@ int converge(double **A, double *old, int n); // 0 -> converged (stop) 1 -> didn
 double calc_off(double **A, int n);
 /*########## output ##########*/
 void print_matrix(double **mat, int lines, int columns);
-/*########## spkmeansmodule ##########*/
-double **mat_from_python_to_C(PyObject *_PyData, int lines, int columns);
-static PyObject *construct_python_matrix(double **C_mat, int lines, int columns);
-static PyObject *goal_switch(PyObject *self, PyObject *args);
-static PyObject *fit(PyObject *self, PyObject *args);
 
 #endif

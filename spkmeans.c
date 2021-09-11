@@ -809,10 +809,7 @@ int main(int argc, char *argv[])
     }
     else
     { /* jacobi */
-        wam = gen_wam(points, n, d);
-        ddg = gen_ddg(wam, n);
-        lnorm = gen_lnorm(wam, ddg, n);
-        eigens = jacobi(lnorm, n);
+        eigens = jacobi(points, n);
 
         for (i = 0; i < n - 1; i++)
         {

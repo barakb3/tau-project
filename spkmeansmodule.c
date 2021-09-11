@@ -69,7 +69,7 @@ static PyObject *goal_switch(PyObject *self, PyObject *args)
     {
         return NULL;
     }
-    
+
     goal = (int)Py_goal;
     n = (int)Py_n;
     k = (int)Py_k;
@@ -156,10 +156,7 @@ static PyObject *goal_switch(PyObject *self, PyObject *args)
     }
     else
     { //goal == 5, jacobi
-        wam = gen_wam(points, n, d);
-        ddg = gen_ddg(wam, n);
-        lnorm = gen_lnorm(wam, ddg, n);
-        eigens = jacobi(lnorm, n);
+        eigens = jacobi(points, n);
 
         _mat = PyTuple_New(n + 1);
         matRow = PyTuple_New(n);

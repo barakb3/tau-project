@@ -635,6 +635,7 @@ void V_to_eigens(double **V, double **A, EIGEN *eigens, int n)
         eigens[i].vector = (double *)malloc(n * sizeof(double));
         assert(eigens[i].vector != NULL);
         eigens[i].value = A[i][i];
+        eigens[i].orig_index = i;
         for (j = 0; j < n; j++)
         {
             eigens[i].vector[j] = V[j][i];

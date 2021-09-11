@@ -56,7 +56,7 @@ void update_A(double **A, int i_tmp, int j_tmp, double s, double c, int n);
 void update_V(double **V, int i_tmp, int j_tmp, double s, double c, int n);
 void V_to_eigens(double **V, double **A, EIGEN *eigens, int n);
 int my_comparator(const void *a, const void *b);
-int converge(double **A, double *old, int n); // 0 -> converged (stop) 1 -> didn't converged (continue)
+int converge(double **A, double *old, int n); /* 0 -> converged (stop) 1 -> didn't converged (continue) */
 double calc_off(double **A, int n);
 /*########## output ##########*/
 void print_matrix(double **mat, int lines, int columns);

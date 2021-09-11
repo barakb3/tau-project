@@ -60,7 +60,6 @@ static PyObject *goal_switch(PyObject *self, PyObject *args)
     int i, j, goal, n, k, d;
     double **points, **wam, **ddg, **lnorm, **T;
     EIGEN *eigens;
-
     if (!PyArg_ParseTuple(args, "Oiiii", &_PyData, &Py_goal, &Py_n, &Py_k, &Py_d))
     {
         return NULL;
@@ -70,7 +69,7 @@ static PyObject *goal_switch(PyObject *self, PyObject *args)
     {
         return NULL;
     }
-
+    
     goal = (int)Py_goal;
     n = (int)Py_n;
     k = (int)Py_k;

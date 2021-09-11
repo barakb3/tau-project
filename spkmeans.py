@@ -70,7 +70,7 @@ if (len(sys.argv) == 4):
     if (goal == 1):  # spk
         if (k >= n):
             sys.exit("Invalid input!")
-        T = spkm.goal_switch(data, 1, n, k, d)
+        T = spkm.goal_switch(data.tolist(), 1, n, k, d)
         k = len(T[0])
         d = k
         centroids_indexes_tuple = kmeans_pp_alg(T, n, k, d)

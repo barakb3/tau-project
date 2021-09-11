@@ -82,6 +82,7 @@ VEC *initialize(FILE *fp, int *n, int *d)
     }
     free(last_vec->first_coor);
     free(last_coor);
+    free(last_vec->next);
     free(last_vec);
     *n = num_of_vec;
     return head;

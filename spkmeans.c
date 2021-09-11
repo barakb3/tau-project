@@ -134,6 +134,7 @@ double **initialize_data(VEC *head, int n, int d)
     free(last_coor);
 
     free(last_vec);
+    
     return data;
 }
 
@@ -172,7 +173,7 @@ int enum_goal(char *arg)
 /*########## SPK ##########*/
 int determine_k(EIGEN *eigens, int n)
 {
-    int i, m, arg_max = 1;
+    int i, m, arg_max = 0;
     double tmp, delta_max = eigens[1].value - eigens[0].value;
     m = (n / 2) - 1;
     for (i = 1; i <= m; i++)

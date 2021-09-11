@@ -66,7 +66,7 @@ VEC *initialize(FILE *fp, int *n, int *d)
         last_coor->next = (COOR *)malloc(sizeof(COOR));
         assert(last_coor->next != NULL);
         last_coor = last_coor->next;
-        if (c == '\n')
+        if (c == '\n' || fsf == 1)
         {
             num_of_vec += 1;
 
@@ -80,7 +80,9 @@ VEC *initialize(FILE *fp, int *n, int *d)
         }
         fsf = fscanf(fp, "%lf%c", &value, &c);
     }
-    *n = num_of_vec + 1;
+    free(last_coor);
+    free(last_vec);
+    *n = num_of_vec;
     return head;
 }
 

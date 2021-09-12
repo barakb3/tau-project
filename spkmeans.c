@@ -733,9 +733,26 @@ int main(int argc, char *argv[])
         ddg = gen_ddg(wam, n);
         lnorm = gen_lnorm(wam, ddg, n);
         eigens = jacobi(lnorm, n);
-        k = determine_k(eigens, n);
+        for (i = 0; i < n - 1; i++)
+        {
+            printf("%.4f,", -0.00005 < eigens[i].value && eigens[i].value < 0.0000 ? 0.0000 : eigens[i].value);
+        }
+        printf("%.4f\n", -0.00005 < eigens[n - 1].value && eigens[n - 1].value < 0.0000 ? 0.0000 : eigens[n - 1].value);
+
+        for (i = 0; i < n - 1; i++)
+        {
+            for (j = 0; j < n - 1; j++)
+            {
+                printf("%.4f,", -0.00005 < eigens[i].vector[j] && eigens[i].vector[j] < 0.0000 ? 0.0000 : eigens[i].vector[j]);
+            }
+            printf("%.4f\n", -0.00005 < eigens[i].vector[n - 1] && eigens[i].vector[n - 1] < 0.0000 ? 0.0000 : eigens[i].vector[n - 1]);
+        }
+        for (j = 0; j < n - 1; j++)
+        {
+            printf("%.4f,", -0.00005 < eigens[n - 1].vector[j] && eigens[n - 1].vector[j] < 0.0000 ? 0.0000 : eigens[n - 1].vector[j]);
+        }
+        printf("%.4f", -0.00005 < eigens[n - 1].vector[n - 1] && eigens[n - 1].vector[n - 1] < 0.0000 ? 0.0000 : eigens[n - 1].vector[n - 1]);
         qsort(eigens, n, sizeof(EIGEN), my_comparator);
-        k = 0;
         if (k == 0)
         {
             k = determine_k(eigens, n);

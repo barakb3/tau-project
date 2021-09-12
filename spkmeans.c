@@ -515,7 +515,7 @@ EIGEN *jacobi(double **A, int n)
 {
     int i, i_tmp = 0, j_tmp = 0, first = 1, cnt = 0;
     double s = 0.0, c = 0.0, old = 0.0;
-    EIGEN *eigens = (EIGEN *)malloc(n * sizeof(EIGEN));
+    EIGEN *eigens = (EIGEN *)calloc(n, sizeof(EIGEN));
     double **V = (double **)malloc(n * sizeof(double *));
     double *V_inner = (double *)calloc(n * n, sizeof(double));
     assert(eigens != NULL);

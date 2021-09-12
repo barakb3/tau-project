@@ -515,7 +515,7 @@ EIGEN *jacobi(double **A, int n)
 {
     int i, i_tmp = 0, j_tmp = 0, first = 1, cnt = 0;
     double s = 0.0, c = 0.0, old = 0.0;
-    EIGEN *eigens = (EIGEN *)malloc(n * 24);
+    EIGEN *eigens = (EIGEN *)malloc(n * sizeof(EIGEN));
     double **V = (double **)malloc(n * sizeof(double *));
     double *V_inner = (double *)calloc(n * n, sizeof(double));
     assert(eigens != NULL);
@@ -733,7 +733,9 @@ int main(int argc, char *argv[])
         ddg = gen_ddg(wam, n);
         lnorm = gen_lnorm(wam, ddg, n);
         eigens = jacobi(lnorm, n);
+        k = determine_k(eigens, n);
         qsort(eigens, n, sizeof(EIGEN), my_comparator);
+        k = 0;
         if (k == 0)
         {
             k = determine_k(eigens, n);

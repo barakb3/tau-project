@@ -513,8 +513,8 @@ double **mat_mul(double **A, double **B, int n)
 /*########## JACOBI ##########*/
 EIGEN *jacobi(double **A, int n)
 {
-    int i, i_tmp, j_tmp, first = 1, cnt = 0;
-    double s, c, old;
+    int i, i_tmp = 0, j_tmp = 0, first = 1, cnt = 0;
+    double s = 0.0, c = 0.0, old = 0.0;
     EIGEN *eigens = (EIGEN *)malloc(n * sizeof(EIGEN));
     double **V = (double **)malloc(n * sizeof(double *));
     double *V_inner = (double *)calloc(n * n, sizeof(double));

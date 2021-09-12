@@ -550,8 +550,8 @@ EIGEN *jacobi(double **A, int n)
     } while (cnt != 100 && converge(A, &old, n));
     V_to_eigens(V, A, eigens, n);
 
-    free(V);
     free(V[0]);
+    free(V);
 
     return eigens;
 }

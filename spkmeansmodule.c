@@ -8,8 +8,8 @@ double **mat_from_python_to_C(PyObject *_PyData, int lines, int columns)
     double coordinate;
     double **mat = (double **)malloc(lines*sizeof(double *));
     double *mat_inner = (double *)malloc(lines*columns*sizeof(double));
-    assert(mat != NULL);
-    assert(mat_inner != NULL);
+    assert(mat != NULL && "An Error Has Occurred");
+    assert(mat_inner != NULL && "An Error Has Occurred");
 
     for (i = 0; i < lines; ++i)
     {

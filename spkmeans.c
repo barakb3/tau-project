@@ -14,8 +14,8 @@ VEC *initialize(FILE *fp, int *n, int *d)
     VEC *head = (VEC *)malloc(sizeof(VEC));
     VEC *last_vec = head;
     COOR *last_coor = (COOR *)malloc(sizeof(COOR));
-    assert(head != NULL);
-    assert(last_coor != NULL);
+    assert(head != NULL && "An Error Has Occurred");
+    assert(last_coor != NULL && "An Error Has Occurred");
     last_vec->first_coor = last_coor;
     last_vec->next = NULL;
 
@@ -29,7 +29,7 @@ VEC *initialize(FILE *fp, int *n, int *d)
             last_coor->value = value;
             last_coor->next = NULL;
             last_coor->next = (COOR *)malloc(sizeof(COOR));
-            assert(last_coor->next != NULL);
+            assert(last_coor->next != NULL && "An Error Has Occurred");
             last_coor = last_coor->next;
 
             dimension += 1;
@@ -48,13 +48,13 @@ VEC *initialize(FILE *fp, int *n, int *d)
     *d = dimension + 1;
 
     last_vec->next = (VEC *)malloc(sizeof(VEC));
-    assert(last_vec->next != NULL);
+    assert(last_vec->next != NULL && "An Error Has Occurred");
     last_vec = last_vec->next;
     last_vec->first_coor = NULL;
     last_vec->next = NULL;
 
     last_vec->first_coor = (COOR *)malloc(sizeof(COOR));
-    assert(last_vec->first_coor != NULL);
+    assert(last_vec->first_coor != NULL && "An Error Has Occurred");
     last_coor = last_vec->first_coor;
 
     /* run from iteration 2 */
@@ -64,7 +64,7 @@ VEC *initialize(FILE *fp, int *n, int *d)
         last_coor->value = value;
         last_coor->next = NULL;
         last_coor->next = (COOR *)malloc(sizeof(COOR));
-        assert(last_coor->next != NULL);
+        assert(last_coor->next != NULL && "An Error Has Occurred");
         last_coor = last_coor->next;
         if (c == '\n' || fsf == 1)
         {
@@ -73,10 +73,10 @@ VEC *initialize(FILE *fp, int *n, int *d)
             free(last_coor);
 
             last_vec->next = (VEC *)malloc(sizeof(VEC));
-            assert(last_vec->next != NULL);
+            assert(last_vec->next != NULL && "An Error Has Occurred");
             last_vec = last_vec->next;
             last_vec->first_coor = (COOR *)malloc(sizeof(COOR));
-            assert(last_vec->first_coor != NULL);
+            assert(last_vec->first_coor != NULL && "An Error Has Occurred");
             last_vec->next = NULL;
             last_coor = last_vec->first_coor;
         }
@@ -99,8 +99,8 @@ double **initialize_data(VEC *head, int n, int d)
     int j = 0;
     double **data = (double **)malloc(n * sizeof(double *));
     double *data_inner = (double *)malloc(n * d * sizeof(double));
-    assert(data != NULL);
-    assert(data_inner != NULL);
+    assert(data != NULL && "An Error Has Occurred");
+    assert(data_inner != NULL && "An Error Has Occurred");
 
     for (i = 0; i < n; ++i)
     {
@@ -212,10 +212,10 @@ double **gen_T(EIGEN *eigens, int n, int k)
     double *U_inner = (double *)malloc(n * k * sizeof(double));
     double **T = (double **)malloc(n * sizeof(double *));
     double *T_inner = (double *)malloc(n * k * sizeof(double));
-    assert(U != NULL);
-    assert(U_inner != NULL);
-    assert(T != NULL);
-    assert(T_inner != NULL);
+    assert(U != NULL && "An Error Has Occurred");
+    assert(U_inner != NULL && "An Error Has Occurred");
+    assert(T != NULL && "An Error Has Occurred");
+    assert(T_inner != NULL && "An Error Has Occurred");
     for (i = 0; i < n; i++)
     {
         U[i] = U_inner + i * k;
@@ -255,8 +255,8 @@ double **initialize_centroids(double **data, int k, int d)
     int j = 0;
     double **centroids = (double **)malloc(k * sizeof(double *));
     double *centroids_inner = (double *)malloc(k * d * sizeof(double));
-    assert(centroids != NULL);
-    assert(centroids_inner != NULL);
+    assert(centroids != NULL && "An Error Has Occurred");
+    assert(centroids_inner != NULL && "An Error Has Occurred");
 
     for (i = 0; i < k; ++i)
     {
@@ -275,7 +275,7 @@ double **initialize_centroids(double **data, int k, int d)
 int *initialize_sizes(int k)
 {
     int *sizes = (int *)calloc(k, sizeof(int));
-    assert(sizes != NULL);
+    assert(sizes != NULL && "An Error Has Occurred");
     /* intializes automatically to array of zeros */
     return sizes;
 }
@@ -285,8 +285,8 @@ double **initialize_sums(int k, int d)
     int i;
     double **sums = (double **)malloc(k * sizeof(double *));
     double *sums_inner = (double *)calloc(k * d, sizeof(double));
-    assert(sums != NULL);
-    assert(sums_inner != NULL);
+    assert(sums != NULL && "An Error Has Occurred");
+    assert(sums_inner != NULL && "An Error Has Occurred");
     for (i = 0; i < k; ++i)
     {
         sums[i] = sums_inner + i * d;
@@ -360,7 +360,7 @@ double *subtract_vectors(double *vec1, double *vec2, int d)
 {
     int i;
     double *res = (double *)malloc(d * sizeof(double));
-    assert(res != NULL);
+    assert(res != NULL && "An Error Has Occurred");
     for (i = 0; i < d; ++i)
     {
         res[i] = vec1[i] - vec2[i];
@@ -384,8 +384,8 @@ double **gen_wam(double **points, int n, int d)
     double weight;
     double **wam = (double **)malloc(n * sizeof(double *));
     double *wam_inner = (double *)calloc(n * n, sizeof(double));
-    assert(wam != NULL);
-    assert(wam_inner != NULL);
+    assert(wam != NULL && "An Error Has Occurred");
+    assert(wam_inner != NULL && "An Error Has Occurred");
     for (i = 0; i < n; i++)
     {
         wam[i] = wam_inner + i * n;
@@ -420,8 +420,8 @@ double **gen_ddg(double **wam, int n)
     int i;
     double **ddg = (double **)malloc(n * sizeof(double *));
     double *ddg_inner = (double *)calloc(n * n, sizeof(double));
-    assert(ddg != NULL);
-    assert(ddg_inner != NULL);
+    assert(ddg != NULL && "An Error Has Occurred");
+    assert(ddg_inner != NULL && "An Error Has Occurred");
     for (i = 0; i < n; i++)
     {
         ddg[i] = ddg_inner + i * n;
@@ -451,8 +451,8 @@ double **gen_lnorm(double **wam, double **ddg, int n)
     double **A, **B;
     double **lnorm = (double **)malloc(n * sizeof(double *));
     double *lnorm_inner = (double *)calloc(n * n, sizeof(double));
-    assert(lnorm != NULL);
-    assert(lnorm_inner != NULL);
+    assert(lnorm != NULL && "An Error Has Occurred");
+    assert(lnorm_inner != NULL && "An Error Has Occurred");
     for (i = 0; i < n; i++)
     {
         lnorm[i] = lnorm_inner + i * n;
@@ -490,8 +490,8 @@ double **mat_mul(double **A, double **B, int n)
     int i, j, k;
     double **ret = (double **)malloc(n * sizeof(double *));
     double *ret_inner = (double *)malloc(n * n * sizeof(double));
-    assert(ret != NULL);
-    assert(ret_inner != NULL);
+    assert(ret != NULL && "An Error Has Occurred");
+    assert(ret_inner != NULL && "An Error Has Occurred");
     for (i = 0; i < n; i++)
     {
         ret[i] = ret_inner + i * n;
@@ -518,9 +518,9 @@ EIGEN *jacobi(double **A, int n)
     EIGEN *eigens = (EIGEN *)malloc(n * sizeof(EIGEN));
     double **V = (double **)malloc(n * sizeof(double *));
     double *V_inner = (double *)calloc(n * n, sizeof(double));
-    assert(eigens != NULL);
-    assert(V != NULL);
-    assert(V_inner != NULL);
+    assert(eigens != NULL && "An Error Has Occurred");
+    assert(V != NULL && "An Error Has Occurred");
+    assert(V_inner != NULL && "An Error Has Occurred");
     for (i = 0; i < n; i++)
     {
         V[i] = V_inner + i * n;
@@ -633,7 +633,7 @@ void V_to_eigens(double **V, double **A, EIGEN *eigens, int n)
     for (i = 0; i < n; i++)
     {
         eigens[i].vector = (double *)malloc(n * sizeof(double));
-        assert(eigens[i].vector != NULL);
+        assert(eigens[i].vector != NULL && "An Error Has Occurred");
         eigens[i].value = A[i][i];
         eigens[i].orig_index = i;
         for (j = 0; j < n; j++)
@@ -716,7 +716,7 @@ int main(int argc, char *argv[])
         }
 
         fp = fopen(argv[3], "r");
-        assert(fp != NULL);
+        assert(fp != NULL && "An Error Has Occurred");
     }
     head = initialize(fp, &n, &d);
     fclose(fp);

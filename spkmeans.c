@@ -521,7 +521,7 @@ EIGEN *jacobi(double **A, int n)
     assert(eigens != NULL);
     assert(V != NULL);
     assert(V_inner != NULL);
-    printf("%d\n", sizeof(EIGEN));
+    printf("%lu\n", sizeof(EIGEN));
     for (i = 0; i < n; i++)
     {
         V[i] = V_inner + i * n;
